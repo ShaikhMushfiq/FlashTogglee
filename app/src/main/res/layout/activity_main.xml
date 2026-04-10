@@ -1,133 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
     android:background="@color/background">
 
-    <!-- Header -->
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_flash"
-        android:tint="@color/accent_yellow" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="FlashToggle"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Double-press power button → flashlight"
-        android:textSize="14sp"
-        android:textColor="@color/text_secondary" />
-
-    <!-- Status card -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/card_background"
+        android:orientation="vertical"
         android:padding="20dp"
-        android:orientation="vertical">
+        android:gravity="center_horizontal">
+
+        <!-- Header -->
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_flash"
+            android:tint="@color/accent_yellow" />
 
         <TextView
-            android:id="@+id/statusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="○ Inactive"
-            android:textColor="@color/inactive_gray" />
-
-    </LinearLayout>
-
-    <!-- Sensitivity control -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/card_background"
-        android:padding="20dp"
-        android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:text="FlashToggle"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
 
         <TextView
-            android:id="@+id/sensitivityLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/text_primary"
-            android:text="Double-press window: 500ms" />
+            android:layout_marginTop="4dp"
+            android:text="Works on all Android phones"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary" />
 
-        <SeekBar
-            android:id="@+id/sensitivitySeek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:max="600"
-            android:progress="300"
-            android:progressTint="@color/accent_yellow"
-            android:thumbTint="@color/accent_yellow" />
-
+        <!-- Status card -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="28dp"
+            android:background="@drawable/card_background"
+            android:padding="18dp"
+            android:orientation="vertical">
+
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Faster (200ms)"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary" />
+                android:textSize="14sp"
+                android:text="○ Inactive"
+                android:textColor="@color/inactive_gray" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
+                android:background="#2a2a2a"/>
+
+            <TextView
+                android:id="@+id/batteryStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="Checking battery optimization..."
+                android:textColor="@color/warn_yellow" />
+
+        </LinearLayout>
+
+        <!-- Main toggle button -->
+        <Button
+            android:id="@+id/toggleButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="14dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:text="Start Service"
+            android:backgroundTint="@color/start_green"
+            android:stateListAnimator="@null" />
+
+        <!-- Setup section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="SETUP (required for reliability)"
+            android:textSize="11sp"
+            android:textColor="@color/text_secondary"
+            android:letterSpacing="0.1" />
+
+        <!-- Step 1: Battery optimization -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Slower (800ms)"
-                android:textSize="11sp"
+                android:text="Step 1 — Disable battery optimization"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="This prevents Android from killing the service when the screen is off."
+                android:textSize="12sp"
                 android:textColor="@color/text_secondary" />
+
+            <Button
+                android:id="@+id/batteryOptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Disable Battery Optimization"
+                android:textSize="12sp"
+                android:backgroundTint="@color/accent_yellow"
+                android:textColor="#000000"
+                android:stateListAnimator="@null" />
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!-- Tip card -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/card_background"
-        android:padding="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Step 2: OEM settings -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="@color/text_secondary"
-            android:text="💡 Tip: If it doesn't work reliably, go to Settings → Battery → and disable battery optimization for this app." />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Step 2 — Allow background autostart"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="iQOO, Xiaomi, Samsung and other OEMs have extra restrictions. Tap for your phone's specific steps."
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+            <Button
+                android:id="@+id/oemSettingsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Show Steps for My Phone"
+                android:textSize="12sp"
+                android:backgroundTint="#2a2a2a"
+                android:textColor="@color/accent_yellow"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Sensitivity control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sensitivityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:text="Double-press window: 500ms" />
+
+            <SeekBar
+                android:id="@+id/sensitivitySeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:max="600"
+                android:progress="300"
+                android:progressTint="@color/accent_yellow"
+                android:thumbTint="@color/accent_yellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="Faster (200ms)"
+                    android:textSize="11sp" android:textColor="@color/text_secondary" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Slower (800ms)" android:textSize="11sp"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="32dp" />
 
     </LinearLayout>
-
-    <!-- Toggle button -->
-    <Button
-        android:id="@+id/toggleButton"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:text="Start Service"
-        android:backgroundTint="@color/start_green"
-        android:stateListAnimator="@null" />
-
-</LinearLayout>
+</ScrollView>
