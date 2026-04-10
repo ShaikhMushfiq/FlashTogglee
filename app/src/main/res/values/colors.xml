@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#121212</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AAAAAA</color>
+    <color name="accent_yellow">#FFD600</color>
+    <color name="active_green">#4CAF50</color>
+    <color name="inactive_gray">#888888</color>
+    <color name="start_green">#2E7D32</color>
+    <color name="stop_red">#C62828</color>
+</resources>
